@@ -15,11 +15,12 @@
  * @param  mixed    $y
  * @return callable    Returns `$x`
  */
-$for = function ($list, callable $call) use ($car, $cdr) {
-    $val = $car($cell);
-    while ($is_nil($val)) {
-        $call($val);
-        $cell = $cdr($cell);
-        $val = $car($cell);
-    }
+$for = function ($list, callable $call) use (&$for, $car, $cdr, $is_nil, $nil, $if) {
+    $call($car($list));
+
+    return $if(
+        $is_nil($cdr($list)),
+        $nil,
+        $for($cdr($list), $call)
+    );
 };

@@ -6,6 +6,10 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html
  */
 
+set_error_handler(function ($errno, $errstr, $errfile, $errline) {
+    throw new \ErrorException($errstr, 0, $errno, $errfile, $errline);
+});
+
 // Phrogramming functions
 include __DIR__ . '/boolean.php';
 include __DIR__ . '/conditional.php';

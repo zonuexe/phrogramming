@@ -94,5 +94,14 @@ $nil = $cons($false, $false);
  * @return callable ($true|$false)
  */
 $is_nil = function ($val) use ($false, $and, $not, $car, $cadr) {
-    return is_callable($val) ? $not($and($car($val), $cadr($val))) : $false;
+    try {
+        return is_callable($val) ? $not($and($car($val), $cadr($val))) : $false;
+    } catch (\ErrorException $e) {
+        $pattern = 'Argument 1 passed to {closure}() must be callable, ';
+        if (strpos($e->getMessage(), $pattern)  === 0) {
+            return $false;
+        }
+
+        throw $e;
+    }
 };
