@@ -1,0 +1,7 @@
+/**
+ * PHProgrammingUnit
+ */
+
+$TestCase = function () {
+    $result = [];
+};
